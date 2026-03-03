@@ -1,0 +1,39 @@
+PROBLEM STATEMENT
+Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+
+------------APPROACH----------------
+check for head cases
+then by matching next ones values with given value and removing elemnt if matching
+
+
+-----------CODE---------------
+
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        while(head!=null && head.val==val){
+            head=head.next;
+        }
+        ListNode temp=head;
+        while(temp!=null && temp.next!=null){
+            if(temp.next.val==val){
+                temp.next=temp.next.next;
+
+            }else{
+                temp=temp.next;
+            }
+        }
+        return head;
+       
+       }
+}
+----------EDGE CASES---------------
+-all same
+-null
+-single node (different val   val !=value )
+
+-------time and space--------
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+----------KEY LEARNINGS---------------
+-null pointer exception

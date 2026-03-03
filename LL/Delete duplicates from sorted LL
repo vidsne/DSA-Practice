@@ -1,0 +1,66 @@
+Problem Statement
+Given the head of a sorted linked list, delete all duplicates such that each element appears only once.
+Return the linked list sorted as well.
+Input: 1 -> 1 -> 2 -> 3 -> 3
+Output: 1 -> 2 -> 3
+
+Approach:
+Since the linked list is sorted, duplicates appear adjacent.
+Traverse the list and compare current node with next node.
+If values are equal, skip the duplicate node by updating pointer.
+Else, move forward.
+
+///////////CODE/////////////
+
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode temp=head;
+        while(temp !=null && temp.next!=null){
+            if(temp.val==temp.next.val){
+                temp.next=temp.next.next;
+            }else{
+                temp=temp.next;
+            }
+        }
+        return head;
+
+        
+    }
+}
+
+
+--------TIME AND SPACE COMPLEXITY---------
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+Reason:
+We traverse the list once and modify pointers in place.
+No extra data structure is used.
+
+-------EDGE CASES--------
+Edge Cases:
+- Empty list (head == null)
+- Single node list
+- All elements same
+- No duplicates
+
+
+-------KEY LEARNINGS--------
+- Proper null checking to avoid NullPointerException
+- Importance of while (node != null && node.next != null)
+- In-place pointer manipulation
+  
+while (node != null && node.next != null)
+It means that Keep running the loop only if:
+1.	Current node exists
+2.	Next node also exists"
+________________________________________
+Why Do We Need Both Conditions?
+Because in many linked list problems, we compare:
+node.val with node.next.val
+If node.next is null and you try: node.next.val
+Java throws: NullPointerException
+
+
+ 

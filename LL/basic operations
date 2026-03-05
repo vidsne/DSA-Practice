@@ -1,0 +1,189 @@
+-------BASIC OPERATIONS ON LINKED LIST-----------
+
+
+public class LL{
+
+//NODE CREATION
+
+  public static class Node{    
+        int data;
+        Node next;
+        public Node(int data){
+            this.data=data;
+            this.next=null;
+        }
+        
+
+    }
+    public static Node head;
+    public static Node tail;
+    public static int size;
+    
+
+//ADD NODE AT BEGINNING OF A LINKED LIST
+
+
+    public void addatfirst(int data){
+            Node newnode=new Node(data);
+            size++;
+            if(head==null){
+                head=tail=newnode;
+                return;
+            }
+            newnode.next=head;
+            head=newnode;
+        }
+
+// ADD NODE AT THE END OF LINKED LIST
+
+
+    public void addlast(int data){
+        Node newlast=new Node(data);
+        size++;
+        if(head==null){
+            head=tail=newlast;
+        }
+        tail.next=newlast;
+        tail=newlast;
+        
+    }
+
+
+//ADD NODE AT SPECIFIC INDEX IN LINKED LIST
+    public void addMiddle(int index, int data){
+        if(index==0){
+            addatfirst(data);
+            return;
+        }
+        Node a=new Node(data);
+        size++;
+        Node temp=head;
+        int i=0;
+        while(i<index-1){
+            temp=temp.next;
+            i++;
+        }
+        a.next=temp.next;
+        temp.next=a;
+    }
+
+//REMOVE NODE FROM BEGINNING OF LL
+    public int removefirst(){
+        if(size==0){
+            System.out.println("empty");
+            return Integer.MIN_VALUE;
+        }else if(size==1){
+            int temp=head.data;
+            head=tail=null;
+            size--;
+            return temp;
+        }
+        int temp=head.data;
+        head=head.next;
+        size--;
+        return temp;
+        }
+
+
+//REMOVE NODE FROM END OF LL        
+    public int removelast(){
+        if(size==0){
+            System.out.println("empty");
+            return Integer.MIN_VALUE;
+
+        }else if(size==1){
+            int val=head.data;
+            head=tail=null;
+            size--;
+            return val;
+        }
+        Node temp=head;
+        int val=tail.data;
+        while(temp.next!=tail){
+            temp=temp.next;
+        }
+        temp.next=null;
+        tail=temp;
+        size--;
+        return val;
+
+    }
+
+
+
+//SEARCHING IN LINKED LIST BY ITERATIVE APPROACH
+
+    public int iterativesearch(int key){
+        if(size==0){
+            System.out.println("empty ll");
+            return Integer.MIN_VALUE;
+        }
+        Node temp=head;
+        for(int i=0;i<size;i++){
+            if(temp.data==key){
+                return i;
+            }
+            temp=temp.next;
+        }
+        return -1;
+
+    }
+
+// SEARCHING IN LL BY RECURSIVE APPROACH
+
+
+//HELPER FUNCTION    
+    public int helper(Node head, int key){
+        if(head==null){
+            return -1;
+        }
+        if(head.data==key){
+            return 0;
+        }
+        int idx=helper(head.next,key);
+        if(idx==-1){
+            return -1;
+        }
+        return idx+1;
+    }
+    public int recsearch(int key){
+        return helper(head,key);
+    }
+
+
+//TO PRINT THE LINKED LIST
+    public void printll(){
+        Node temp=head;
+        if(head==null){
+            System.out.println("empty ll");
+            return;
+        }
+        while(temp !=null){
+            System.out.print(temp.data+"->");
+            temp=temp.next;
+        }
+        System.out.print("null");
+    }
+
+
+//MAIN FUNCTION
+    public static void main(String[] args){
+        LL l=new LL();
+        l.addatfirst(1);
+        l.addatfirst(3);
+        l.addlast(6);
+        l.addMiddle(1,10);
+        l.printll();
+        System.out.println(l.removefirst());
+        l.printll();
+        System.out.println("size="+l.size);
+        System.out.println("found at pos "+l.iterativesearch(6));
+        System.out.println(l.recsearch(22));
+        l.reverse();
+        l.printll();
+        l.removeNend(2);
+        l.printll();
+        System.out.println(l.palindrome());
+
+    }
+}

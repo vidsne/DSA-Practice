@@ -1,0 +1,27 @@
+------PROBLEM STATEMENT----------
+Given head, the head of a linked list, determine if the linked list has a cycle in it.
+There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to. Note that pos is not passed as a parameter.
+Return true if there is a cycle in the linked list. Otherwise, return false.
+
+-----CODE----------
+
+ ListNode slow=head;
+        ListNode fast=head;
+        if(head==null || head.next==null){
+            return false;
+        }
+        
+        while(fast!=null && fast.next!=null){
+            
+            slow=slow.next;
+            fast=fast.next.next;
+            if(fast==slow){
+                return true;
+            }
+        }
+        return false;
+
+1-2-3-4 WHEN CYCLE=> 1-2-3-1
+Even though 3 has two “logical options” (4 and 1), in your case 3.next = 1 only. 
+A node in a singly linked list can only have one next pointer. 
+So slow and fast just follow the .next pointers as defined.
